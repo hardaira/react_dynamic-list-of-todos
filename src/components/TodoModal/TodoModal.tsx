@@ -5,11 +5,12 @@ import { User } from '../../types/User';
 
 type Props = {
   todo: Todo;
+  selectedTodo: Todo;
   setShown: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedTodo: React.Dispatch<React.SetStateAction<Todo | null>>;
 };
 
-export const TodoModal: React.FC<Props> = ({ todo, setShown }) => {
+export const TodoModal: React.FC<Props> = ({ todo, setShown, setSelectedTodo }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -46,6 +47,7 @@ export const TodoModal: React.FC<Props> = ({ todo, setShown }) => {
               data-cy="modal-close"
               onClick={() => {
                 setShown(false);
+                setSelectedTodo(null);
               }}
             />
           </header>

@@ -73,6 +73,7 @@ export const App: React.FC = () => {
                 onQueryChange={handleQueryChange}
                 setQuery={setQuery}
                 handleStatusChange={handleStatusChange}
+                setSelectedTodo={setSelectedTodo}
               />
             </div>
 
@@ -83,6 +84,7 @@ export const App: React.FC = () => {
                   todos={filteredTodos}
                   setShown={setShown}
                   setSelectedTodo={setSelectedTodo}
+                  selectedTodo={selectedTodo}
                 />
               )}
             </div>
@@ -90,7 +92,14 @@ export const App: React.FC = () => {
         </div>
       </div>
 
-      {shown && <TodoModal todo={selectedTodo} setShown={setShown} />}
+      {shown && (
+        <TodoModal
+          todo={selectedTodo}
+          setShown={setShown}
+          selectedTodo={selectedTodo}
+          setSelectedTodo={setSelectedTodo}
+        />
+      )}
     </>
   );
 };
