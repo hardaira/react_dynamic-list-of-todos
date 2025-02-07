@@ -1,70 +1,72 @@
-import React from 'react';
 import { Todo } from '../../types/Todo';
-import { User } from '../../types/User';
+import React from 'react'; 
 
 type Props = {
   todos: Todo[];
-  users: User[];
+  shown: boolean;
   setShown: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedTodo: React.Dispatch<React.SetStateAction<Todo | null>>;
 };
 
 export const TodoList: React.FC<Props> = React.memo(
-  ({ todos, setShown, setSelectedTodo }) => (
-    <table className="table is-narrow is-fullwidth">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>
-            <span className="icon">
-              <i className="fas fa-check" />
-            </span>
-          </th>
-          <th>Title</th>
-          <th> </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {todos.map((todo, index) => (
-          <tr key={todo.id} data-cy="todo" className="">
-            <td className="is-vcentered">{index + 1}</td>
-            <td className="is-vcentered">
-              {todo.completed && (
-                <span className="icon">
-                  <i className="fas fa-check" />
-                </span>
-              )}
-            </td>
-            <td />
-            <td className="is-vcentered is-expanded">
-              <p
-                className={`
-              ${!todo.completed ? 'has-text-danger' : 'has-text-success'}
-              `}
-              >
-                {todo.title}
-              </p>
-            </td>
-            <td className="has-text-right is-vcentered">
-              <button
-                data-cy="selectButton"
-                className="button"
-                type="button"
-                onClick={() => {
-                  setShown(true);
-                  setSelectedTodo(todo);
-                }}
-              >
-                <span className="icon">
-                  <i className="far fa-eye" />
-                </span>
-              </button>
-            </td>
+  ({ todos, shown, setShown, setSelectedTodo }) => {
+    return (
+      <table className="table is-narrow is-fullwidth">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>
+              <span className="icon">
+                <i className="fas fa-check" />
+              </span>
+            </th>
+            <th>Title</th>
+            <th> </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  ),
+        </thead>
+
+        <tbody>
+          {todos.map((todo, index) => (
+            <tr key={todo.id} data-cy="todo">
+              <td className="is-vcentered">{index + 1}</td>
+              <td className="is-vcentered">
+                {todo.completed && (
+                  <span className="icon">
+                    <i className="fas fa-check" />
+                  </span>
+                )}
+              </td>
+              <td />
+              <td className="is-vcentered is-expanded">
+                <p
+                  className={
+                    todo.completed ? 'has-text-danger' : 'has-text-success'
+                  }
+                >
+                  {todo.title}
+                </p>
+              </td>
+              <td className="has-text-right is-vcentered">
+                <button
+                  data-cy="selectButton"
+                  className="button"
+                  type="button"
+                  onClick={() => {
+                    setSelectedTodo(todo);
+                    setShown(true);
+                  }}
+                >
+                  <span className="icon">
+                    <i className={shown ? 'far fa-eye-slash' : 'far fa-eye'} />
+                  </span>
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  },
 );
-TodoList.displayName = "TodoList";
+
+TodoList.displayName = 'TodoList';

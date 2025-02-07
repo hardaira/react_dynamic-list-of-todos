@@ -32,8 +32,8 @@ export const App: React.FC = () => {
       setDone(todos.filter(todo => todo.completed));
       setUndone([]);
     } else {
-      setDone([]);
-      setUndone([]);
+      setDone(todos);
+      setUndone(todos);
     }
   };
 

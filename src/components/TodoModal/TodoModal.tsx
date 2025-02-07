@@ -6,6 +6,7 @@ import { User } from '../../types/User';
 type Props = {
   todo: Todo;
   setShown: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedTodo: React.Dispatch<React.SetStateAction<Todo | null>>;
 };
 
 export const TodoModal: React.FC<Props> = ({ todo, setShown }) => {
@@ -43,7 +44,9 @@ export const TodoModal: React.FC<Props> = ({ todo, setShown }) => {
               type="button"
               className="delete"
               data-cy="modal-close"
-              onClick={() => setShown(false)}
+              onClick={() => {
+                setShown(false);
+              }}
             />
           </header>
 
@@ -63,7 +66,7 @@ export const TodoModal: React.FC<Props> = ({ todo, setShown }) => {
               </strong>
               {' by '}
 
-              <a href={`mailto:${user.email}`}>{user.name}</a>
+              <a href={`mailto:${user?.email}`}>{user?.name}</a>
             </p>
           </div>
         </div>
