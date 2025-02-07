@@ -1,15 +1,15 @@
 import { Todo } from '../../types/Todo';
-import React from 'react'; 
+import React from 'react';
 
 type Props = {
   todos: Todo[];
-  shown: boolean;
+  selectedTodo: Todo;
   setShown: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedTodo: React.Dispatch<React.SetStateAction<Todo | null>>;
 };
 
 export const TodoList: React.FC<Props> = React.memo(
-  ({ todos, shown, setShown, setSelectedTodo }) => {
+  ({ todos, selectedTodo, setShown, setSelectedTodo }) => {
     return (
       <table className="table is-narrow is-fullwidth">
         <thead>
@@ -26,9 +26,9 @@ export const TodoList: React.FC<Props> = React.memo(
         </thead>
 
         <tbody>
-          {todos.map((todo, index) => (
+          {todos.map(todo => (
             <tr key={todo.id} data-cy="todo">
-              <td className="is-vcentered">{index + 1}</td>
+              <td className="is-vcentered">{todo.id}</td>
               <td className="is-vcentered">
                 {todo.completed && (
                   <span className="icon">
@@ -57,7 +57,13 @@ export const TodoList: React.FC<Props> = React.memo(
                   }}
                 >
                   <span className="icon">
-                    <i className={shown ? 'far fa-eye-slash' : 'far fa-eye'} />
+                    <i
+                      className={
+                        todo.id === selectedTodo?.id
+                          ? 'far fa-eye-slash'
+                          : 'far fa-eye'
+                      }
+                    />
                   </span>
                 </button>
               </td>
