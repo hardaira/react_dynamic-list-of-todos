@@ -10,7 +10,11 @@ type Props = {
   setSelectedTodo: React.Dispatch<React.SetStateAction<Todo | null>>;
 };
 
-export const TodoModal: React.FC<Props> = ({ todo, setShown, setSelectedTodo }) => {
+export const TodoModal: React.FC<Props> = ({
+  todo,
+  setShown,
+  setSelectedTodo,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 

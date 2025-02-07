@@ -40,7 +40,7 @@ export const TodoList: React.FC<Props> = React.memo(
               <td className="is-vcentered is-expanded">
                 <p
                   className={
-                    todo.completed ? 'has-text-danger' : 'has-text-success'
+                    !todo.completed ? 'has-text-danger' : 'has-text-success'
                   }
                 >
                   {todo.title}
